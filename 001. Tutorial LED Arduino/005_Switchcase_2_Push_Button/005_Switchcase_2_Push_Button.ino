@@ -26,35 +26,46 @@
 int button = 7;
 int nilaibutton;
 int count;
-int led = 13;
-
+int led1 = 13;
+int led2 = 12;
 void setup(){
   Serial.begin(9600);
   pinMode(button, INPUT);
- pinMode(led, OUTPUT);
- 
+ pinMode(led1, OUTPUT);
+ pinMode(led2, OUTPUT);
   
 }
 
 
 void loop() {
    nilaibutton = digitalRead(button);
-    Serial.println(nilaibutton);
  
    if(nilaibutton == 1){
     count+=1;
- 
-    delay(300);
-
-    if(count==1){
-       digitalWrite(led, HIGH);
-    }
-
-    if(count==2){
-         digitalWrite(led, LOW);
-         count=0;
-    }
+   
+     Serial.println(count);
+   }
+   switch (count) {
+      
+    case 1:
+         digitalWrite(led2, LOW);
+        digitalWrite(led1, HIGH);
+        
+        delay(300);
+       
+      break;
+    case 2:
+    digitalWrite(led1, LOW);
+      digitalWrite(led2, HIGH);
+        delay(300);
+        
+      break;
+   
+    default:
+     count = 0;
+      break;
   }
 
-  
+    
+ 
 }
